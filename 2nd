@@ -1,0 +1,87 @@
+APP.JS
+
+import React, { useState } from 'react';
+import './App.css';
+function App() {
+const [votes, setVotes] = useState({ option1: 0, option2: 0, option3: 0 });
+const handleVote = (option) => {
+setVotes((prevVotes) => ({
+...prevVotes,
+[option]: prevVotes[option] + 1,
+}));
+};
+return (
+<div className="App">
+<h1>Voting Application</h1>
+<div className="options">
+<div>
+Option 1:
+<button onClick={() => handleVote('option1')}>BJP</button>
+<span>{votes.option1}</span>
+</div>
+<div>
+Option 2:
+<button onClick={() => handleVote('option2')}>Congress</button>
+<span>{votes.option2}</span>
+</div>
+<div>
+Option 3:
+<button onClick={() => handleVote('option3')}>JDS</button>
+<span>{votes.option3}</span>
+</div>
+</div>
+</div>
+);
+}
+export default App;
+
+
+
+INDEX.JS
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<React.StrictMode>
+<App />
+</React.StrictMode>
+);
+
+
+
+APP.CSS
+
+.App {
+text-align: center;
+}
+.App-logo {
+height: 40vmin;
+pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+animation: App-logo-spin infinite 20s linear;
+}
+}
+.App-header {
+background-color: #282c34;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(10px + 2vmin);
+color: white;
+}
+.App-link {
+color: #61dafb;
+}
+@keyframes App-logo-spin {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
