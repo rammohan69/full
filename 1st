@@ -1,0 +1,88 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+CSS
+
+.chat-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.chat-box {
+  height: 300px;
+  overflow-y: scroll;
+  border: 5px dashed #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+input[type="text"] {
+  width: calc(100% - 60px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+JS
+
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+// Predefined question-answer pairs
+const predefinedQA = {
+  "How are you?": "I'm good, thank you!",
+  "What is your name?": "My name is ChatBot.",
+  "What can you do?": "I can answer predefined questions.",
+  "Goodbye": "Goodbye! Have a nice day!",
+  "How was your day?": "It’s nearing the end of the day, your phone dings and a “How was your day?” text stares back at you. Maybe it’s from your crush, best friend, or even your parent. They just want to check in, but how do you respond? Whether you’ve had a good or bad day, we’ve got you covered! Keep reading to learn how you can respond on any type of day to just about anyone."
+};
+function sendMessage() {
+  const userMessage = userInput.value.trim();
+  // Display user message in the chat box
+  displayMessage(userMessage);
+  // If the user's message matches a predefined question, get the answer
+  const answer = predefinedQA[userMessage];
+  if (answer) {
+    displayMessage(answer);
+  } else {
+    displayMessage("I'm sorry, I don't understand.");
+  }
+  // Clear user input
+  userInput.value = '';
+}
+function displayMessage(message) {
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  chatBox.appendChild(messageDiv);
+  // Scroll to bottom
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
